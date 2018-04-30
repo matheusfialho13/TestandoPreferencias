@@ -39,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
         checkPreferences();
         register();
 
+        Button butCadastrar = (Button) findViewById(R.id.butCadastrar);
+        butCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                swapScreen(MainActivity.this, SQLiteTeste.class);
+            }
+        });
+
     }
 
     // Cadastrando Usúário ao clicar em cadastrar
@@ -50,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 insetPreferences();
                 Toast.makeText(getApplicationContext(), "Cadastrado", Toast.LENGTH_SHORT).show();
                 // Mudando para tela com as informações fornecidas (PerfilActivity)
-                swapScreen();
+                swapScreen(MainActivity.this, PerfilActivity.class);
             }
 
         });
@@ -65,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
 
         // Se já tiver troca para tela de Perfil
         if(valorName != null && valorIdade > 0){
-            swapScreen();
+            swapScreen(MainActivity.this, PerfilActivity.class);
         }
     }
 
     // Trocando para a tela PerfilActivity
-    public void swapScreen(){
-        Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
+    public void swapScreen(Context context, Class classe){
+        Intent intent = new Intent(context, classe);
         startActivity(intent);
     }
 
